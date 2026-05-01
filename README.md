@@ -1,16 +1,26 @@
-# AeroBeat Input Driver - Gamepad
+# aerobeat-input-gamepad
 
-This is the official Input driver for AeroBeat's Gamepad support.
+Future-facing AeroBeat gamepad input package for accessibility, platform exploration, and controller-side experiments.
 
-Input Drivers bridge hardware (Webcams, VR Controllers, Smart Watches) to the AeroBeat Core contracts.
+## Repo stance
 
-## 📋 Repository Details
+AeroBeat v1 gameplay is officially **camera-first**.
 
-*   **Type:** Input Driver
-*   **License:** **Mozilla Public License 2.0 (MPL 2.0)**
-*   **Dependencies:**
-    *   `aerobeat-core` (Required)
-    *   `aerobeat-vendor-*` (Allowed)
+This repo remains in the workspace so the broader input architecture can keep a documented gamepad path, but gamepad is **not** an official v1 gameplay input target. Its current role is narrower:
+
+- **Official v1 gameplay path:** camera providers
+- **Current gamepad role:** future-facing accessibility and platform exploration
+- **Not a current product promise:** equal-status gameplay parity with the camera-first Boxing and Flow path
+- **Still useful for:** controller experiments, future platform planning, and accessibility research
+
+In other words: this package stays visible as documented future work without implying that AeroBeat currently ships or endorses gamepad as an official v1 gameplay mode.
+
+## Repository details
+
+- **Type:** Input driver package
+- **License:** **Mozilla Public License 2.0 (MPL 2.0)**
+- **Primary dependency:** `aerobeat-input-core`
+- **Optional future-facing dependencies:** vendor/controller integrations as needed
 
 ## GodotEnv development flow
 
@@ -33,7 +43,7 @@ cd .testbed
 godotenv addons install
 ```
 
-That installs the pinned `aerobeat-core` foundation plus GUT into `.testbed/addons/`.
+That restores this repo's current dev/test manifest into `.testbed/addons/`, including the shared `aerobeat-input-core` contract package plus GUT for validation.
 
 ### Open the workbench
 
@@ -43,7 +53,7 @@ From the repo root:
 godot --editor --path .testbed
 ```
 
-Use this `.testbed/` project as the canonical direct-development and bugfinding surface for input-driver work.
+Use this `.testbed/` project as the canonical direct-development and bugfinding surface for future gamepad-driver work.
 
 ### Import smoke check
 
@@ -67,6 +77,6 @@ godot --headless --path .testbed --script addons/gut/gut_cmdln.gd \
 ### Validation notes
 
 - `.testbed/addons.jsonc` is the committed dev/test dependency contract.
-- The manifest pins `aerobeat-core` to `v0.1.0` and GUT to `main`.
+- The manifest should describe the shared contract dependency as `aerobeat-input-core`, matching current lane ownership.
 - Repo-local unit tests live under `.testbed/tests/`; this repo's current package payload is rooted at `/`, so the workbench does not ship a `.testbed/src` bridge for this subset.
-- The current package shape is consumed from the repo root (`subfolder: "/"`) for downstream installs.
+- Validation for this repo should preserve the downscoped product truth: gamepad remains documented future/accessibility/platform exploration, while official v1 gameplay support stays camera-first.
